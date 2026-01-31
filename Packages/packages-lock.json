@@ -1,5 +1,46 @@
 {
   "dependencies": {
+    "com.dreemurrstudio.audiosystem": {
+      "version": "https://github.com/DreemurrDango/unitypackages-audiosystem.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.dreemurrstudio.utilities": "1.0.0"
+      },
+      "hash": "13e9520c0989eed8db360bfd1e2cb6bfc03ba6d7"
+    },
+    "com.dreemurrstudio.collectionextension": {
+      "version": "https://github.com/DreemurrDango/CollectionExtension.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a73c83b9d229e93ed90fd85b5d2845bd869db82a"
+    },
+    "com.dreemurrstudio.globalinitialize": {
+      "version": "https://github.com/DreemurrDango/unitypackages-globalinitialize.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.dreemurrstudio.utilities": "2.0.0"
+      },
+      "hash": "8546d023cfba7b06ca4373761ce09bfff8d2ac66"
+    },
+    "com.dreemurrstudio.uitransition": {
+      "version": "https://github.com/DreemurrDango/unitypackages-uitransition.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "999ef3b2553069003663c4bfb7e10827a96fddef"
+    },
+    "com.dreemurrstudio.utilities": {
+      "version": "https://github.com/DreemurrDango/unitypackages-utilities.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.0"
+      },
+      "hash": "5fdadb09720bd147afa57bb7b69c2179df1f2159"
+    },
     "com.unity.2d.animation": {
       "version": "9.2.0",
       "depth": 1,
@@ -149,6 +190,13 @@
     },
     "com.unity.mathematics": {
       "version": "1.2.6",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.cn"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
