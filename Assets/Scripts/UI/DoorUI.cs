@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DoorUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    [Tooltip("卡牌槽位游戏对线")]
+    private GameObject cardSlotGO;
+    [SerializeField]
+    [Tooltip("可放置提示显示对象")]
+    private GameObject placeableTipShowGO;
+    [SerializeField]
+    [Tooltip("卡牌UI预制体")]
+    private CardUI cardUIPrefab;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    /// <summary>
+    /// 当前门上放置的卡牌UI实例
+    /// </summary>
+    private CardUI cardUI;
 }
