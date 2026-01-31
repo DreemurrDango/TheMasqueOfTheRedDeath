@@ -11,14 +11,6 @@ using UnityEngine.UI;
 /// </summary>
 public class CardUI : MonoBehaviour
 {
-    public enum CardState
-    {
-        InHand,
-        Used,
-        InRoom,
-        InDoor
-    }
-
     [Header("UI组件")]
     [SerializeField]
     [Tooltip("卡牌的描边")]
@@ -71,6 +63,10 @@ public class CardUI : MonoBehaviour
     [Tooltip("卡牌缩放切换动画时间")]
     private float scaleTransitionTime = 0.3f;
 
+    /// <summary>
+    /// 已查看此卡牌后，拥有查看权力的玩家ID列表
+    /// </summary>
+    private List<PlayerID> visablePlayer;
     /// <summary>
     /// 当前所有者或最后的打出者的ID
     /// </summary>

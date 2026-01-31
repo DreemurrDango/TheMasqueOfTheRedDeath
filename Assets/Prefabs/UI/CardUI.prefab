@@ -256,7 +256,7 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 140, y: 200}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3113097708067906788
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -308,8 +308,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineImage: {fileID: 9093487987791904177}
-  normalOutlineColor: {r: 0.19215688, g: 0.18823531, b: 0.18823531, a: 1}
-  hoverOutlineColor: {r: 1, g: 1, b: 1, a: 1}
   portrait: {fileID: 4668432007827053135}
   abilityDesText: {fileID: 7680047980652824833}
   affiliationText: {fileID: 6979394798552353190}
@@ -320,6 +318,11 @@ MonoBehaviour:
   cardHideMaskGO: {fileID: 2073530852324684048}
   interactTipText: {fileID: 1711111184349960517}
   sourceHistoryText: {fileID: 5254382964132006424}
+  normalOutlineColor: {r: 0.19215688, g: 0.18823531, b: 0.18823531, a: 1}
+  hoverOutlineColor: {r: 1, g: 1, b: 1, a: 1}
+  normalScale: 1
+  hoverScale: 1.4
+  scaleTransitionTime: 0.3
 --- !u!1 &2269565109061368928
 GameObject:
   m_ObjectHideFlags: 0

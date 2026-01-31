@@ -65,4 +65,24 @@ namespace DataCollection
         /// </summary>
         public string AffiliationName => affiliation.ToString();
     }
+
+    /// <summary>
+    /// 玩家信息配置
+    /// </summary>
+    [System.Serializable]
+    public class PlayerInfo
+    {
+        /// <summary>
+        /// 玩家ID
+        /// </summary>
+        public PlayerID id;
+        /// <summary>
+        /// 玩家名称
+        /// </summary>
+        public string name;
+        /// <summary>
+        /// 玩家名称颜色
+        /// </summary>
+        public Color nameColor;
+    }
 }

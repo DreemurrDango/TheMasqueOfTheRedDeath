@@ -58,7 +58,7 @@ namespace Enums
     public enum Affiliation
     {
         红死魔,
-        贵族,
+        宾客,
         特殊_窃贼,
         特殊_刺客
     }
@@ -72,5 +72,30 @@ namespace Enums
         发动效果 = 1 << 0,
         封锁走廊 = 1 << 1,
         盖卡放置 = 1 << 2
+    }
+
+    /// <summary>
+    /// 卡牌位置状态
+    /// </summary>
+    public enum CardState
+    {
+        //卡牌未在本局游戏中使用
+        NONE,
+        /// <summary>
+        /// 卡牌在手中
+        /// </summary>
+        InHand,
+        /// <summary>
+        /// 卡牌已因被使用而从游戏中除外
+        /// </summary>
+        Used,
+        /// <summary>
+        /// 卡牌被放置在房间中
+        /// </summary>
+        InRoom,
+        /// <summary>
+        /// 卡牌被放置在门中用于封锁走廊
+        /// </summary>
+        InDoor
     }
 }

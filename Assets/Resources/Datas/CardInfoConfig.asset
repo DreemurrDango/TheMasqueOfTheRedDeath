@@ -32,13 +32,13 @@ MonoBehaviour:
     afiliationTextColor: {r: 0.5411765, g: 0, b: 0, a: 1}
     usageType: 6
   - id: 2
-    nameColor: {r: 0.8000001, g: 0.8000001, b: 0.8000001, a: 1}
+    nameColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     portrait: {fileID: 0}
     portColor: {r: 0.5019608, g: 0.5176471, b: 0.5803922, a: 1}
     abilityDesc: 
     victoryCondition: 
     affiliation: 2
-    afiliationTextColor: {r: 0.5254902, g: 0.5254902, b: 0.5254902, a: 1}
+    afiliationTextColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     usageType: 0
   - id: 3
     nameColor: {r: 0.8000001, g: 0.8000001, b: 0.8000001, a: 1}
