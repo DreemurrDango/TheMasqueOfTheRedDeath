@@ -1,0 +1,150 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f8af4884105d4449bc529589d4e9430, type: 3}
+  m_Name: CardInfoConfig
+  m_EditorClassIdentifier: 
+  cardInfoList:
+  - id: 0
+    nameColor: {r: 0.58431375, g: 0.050980397, b: 0.050980397, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.52156866, g: 0.050980397, b: 0.050980397, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 0
+    afiliationTextColor: {r: 0.5411765, g: 0, b: 0, a: 1}
+    usageType: 0
+  - id: 1
+    nameColor: {r: 0.58431375, g: 0.050980397, b: 0.050980397, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.52156866, g: 0.050980397, b: 0.050980397, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 0
+    afiliationTextColor: {r: 0.5411765, g: 0, b: 0, a: 1}
+    usageType: 6
+  - id: 2
+    nameColor: {r: 0.8000001, g: 0.8000001, b: 0.8000001, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.5019608, g: 0.5176471, b: 0.5803922, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 2
+    afiliationTextColor: {r: 0.5254902, g: 0.5254902, b: 0.5254902, a: 1}
+    usageType: 0
+  - id: 3
+    nameColor: {r: 0.8000001, g: 0.8000001, b: 0.8000001, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.5019608, g: 0.5176471, b: 0.5803922, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 3
+    afiliationTextColor: {r: 0.5254902, g: 0.5254902, b: 0.5254902, a: 1}
+    usageType: 0
+  - id: 4
+    nameColor: {r: 0.35686275, g: 0.42352945, b: 1, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.37647063, g: 0.4901961, b: 0.91372555, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 1
+    afiliationTextColor: {r: 0.21960786, g: 0.37647063, b: 0.85098046, a: 1}
+    usageType: 0
+  - id: 5
+    nameColor: {r: 0.35686275, g: 0.42352945, b: 1, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.37647063, g: 0.4901961, b: 0.91372555, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 1
+    afiliationTextColor: {r: 0.21960786, g: 0.37647063, b: 0.85098046, a: 1}
+    usageType: 0
+  - id: 6
+    nameColor: {r: 0.35686275, g: 0.42352945, b: 1, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.37647063, g: 0.4901961, b: 0.91372555, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 1
+    afiliationTextColor: {r: 0.21960786, g: 0.37647063, b: 0.85098046, a: 1}
+    usageType: 0
+  - id: 7
+    nameColor: {r: 0.35686275, g: 0.42352945, b: 1, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.37647063, g: 0.4901961, b: 0.91372555, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 1
+    afiliationTextColor: {r: 0.21960786, g: 0.37647063, b: 0.85098046, a: 1}
+    usageType: 0
+  - id: 8
+    nameColor: {r: 0.35686275, g: 0.42352945, b: 1, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.37647063, g: 0.4901961, b: 0.91372555, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 1
+    afiliationTextColor: {r: 0.21960786, g: 0.37647063, b: 0.85098046, a: 1}
+    usageType: 0
+  - id: 9
+    nameColor: {r: 0.35686275, g: 0.42352945, b: 1, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.37647063, g: 0.4901961, b: 0.91372555, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 1
+    afiliationTextColor: {r: 0.21960786, g: 0.37647063, b: 0.85098046, a: 1}
+    usageType: 0
+  - id: 10
+    nameColor: {r: 0.35686275, g: 0.42352945, b: 1, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.37647063, g: 0.4901961, b: 0.91372555, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 1
+    afiliationTextColor: {r: 0.21960786, g: 0.37647063, b: 0.85098046, a: 1}
+    usageType: 0
+  - id: 11
+    nameColor: {r: 0.35686275, g: 0.42352945, b: 1, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.37647063, g: 0.4901961, b: 0.91372555, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 1
+    afiliationTextColor: {r: 0.21960786, g: 0.37647063, b: 0.85098046, a: 1}
+    usageType: 0
+  - id: 12
+    nameColor: {r: 0.35686275, g: 0.42352945, b: 1, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.37647063, g: 0.4901961, b: 0.91372555, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 1
+    afiliationTextColor: {r: 0.21960786, g: 0.37647063, b: 0.85098046, a: 1}
+    usageType: 0
+  - id: 13
+    nameColor: {r: 0.35686275, g: 0.42352945, b: 1, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.37647063, g: 0.4901961, b: 0.91372555, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 1
+    afiliationTextColor: {r: 0.21960786, g: 0.37647063, b: 0.85098046, a: 1}
+    usageType: 0
+  - id: 14
+    nameColor: {r: 0.35686275, g: 0.42352945, b: 1, a: 1}
+    portrait: {fileID: 0}
+    portColor: {r: 0.37647063, g: 0.4901961, b: 0.91372555, a: 1}
+    abilityDesc: 
+    victoryCondition: 
+    affiliation: 1
+    afiliationTextColor: {r: 0.21960786, g: 0.37647063, b: 0.85098046, a: 1}
+    usageType: 0

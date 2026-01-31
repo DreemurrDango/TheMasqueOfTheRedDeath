@@ -4,6 +4,18 @@ using UnityEngine;
 namespace Enums
 {
     /// <summary>
+    /// 玩家ID枚举
+    /// </summary>
+    public enum PlayerID
+    {
+        玩家1 = 0,
+        玩家2 = 1,
+        玩家3 = 2,
+        玩家4 = 3,
+        COUNT
+    }
+
+    /// <summary>
     /// 角色卡枚举
     /// </summary>
     public enum CardID
@@ -30,13 +42,13 @@ namespace Enums
     /// </summary>
     public enum RoomID
     {
-        蓝色 = 0,
-        紫红 = 1,
-        绿色 = 2,
-        橙黄 = 3,
-        白色 = 4,
-        紫色 = 5,
-        黑色 = 6,
+        蓝色房间 = 0,
+        紫红房间 = 1,
+        绿色房间 = 2,
+        橙黄房间 = 3,
+        白色房间 = 4,
+        紫色房间 = 5,
+        黑色房间 = 6,
         COUNT
     }
 

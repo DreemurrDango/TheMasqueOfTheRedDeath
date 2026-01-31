@@ -22,11 +22,19 @@ namespace DataCollection
         /// <summary>
         /// 卡牌身份枚举
         /// </summary>
-        public CardID card;
+        public CardID id;
+        /// <summary>
+        /// 身份名颜色
+        /// </summary>
+        public Color nameColor;
         /// <summary>
         /// 卡牌角色画像图片
         /// </summary>
         public Sprite portrait;
+        /// <summary>
+        /// 身份对应的画像颜色
+        /// </summary>
+        public Color portColor;
         /// <summary>
         /// 卡牌能力说明
         /// </summary>
@@ -40,6 +48,10 @@ namespace DataCollection
         /// </summary>
         public Affiliation affiliation;
         /// <summary>
+        /// 阵营文本颜色
+        /// </summary>
+        public Color afiliationTextColor;
+        /// <summary>
         /// 卡牌的使用方式
         /// </summary>
         public CardUsageType usageType;
@@ -47,7 +59,7 @@ namespace DataCollection
         /// <summary>
         /// 获取卡牌的显示名称
         /// </summary>
-        public string CardName => card.ToString();
+        public string CardName => id.ToString();
         /// <summary>
         /// 阵营显示名称
         /// </summary>
