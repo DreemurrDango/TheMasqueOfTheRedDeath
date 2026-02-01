@@ -3,6 +3,7 @@
     "com.dreemurrstudio.audiosystem": "https://github.com/DreemurrDango/unitypackages-audiosystem.git",
     "com.dreemurrstudio.collectionextension": "https://github.com/DreemurrDango/CollectionExtension.git",
     "com.dreemurrstudio.globalinitialize": "https://github.com/DreemurrDango/unitypackages-globalinitialize.git",
+    "com.dreemurrstudio.network": "https://github.com/DreemurrDango/unitypackages-network.git",
     "com.dreemurrstudio.uitransition": "https://github.com/DreemurrDango/unitypackages-uitransition.git",
     "com.dreemurrstudio.utilities": "https://github.com/DreemurrDango/unitypackages-utilities.git",
     "com.unity.feature.2d": "2.0.1",

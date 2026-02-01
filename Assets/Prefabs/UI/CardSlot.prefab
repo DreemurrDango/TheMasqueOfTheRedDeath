@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2662105403156520188}
   - component: {fileID: 1088407118270269401}
   - component: {fileID: 9221682000921275757}
+  - component: {fileID: 1148793654923479227}
   m_Layer: 5
   m_Name: CardSlot
   m_TagString: Untagged
@@ -76,6 +77,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1148793654923479227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8392170368555452691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c02c5b5233b5b843a913adf67bbbcdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card: {fileID: 1293684364070007654}
 --- !u!1001 &5007694791047078985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188,11 +202,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5569581662512315853, guid: 1886153a9d4364844b5d2f6c7cd04292, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1886153a9d4364844b5d2f6c7cd04292, type: 3}
+--- !u!114 &1293684364070007654 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6091946369221777199, guid: 1886153a9d4364844b5d2f6c7cd04292, type: 3}
+  m_PrefabInstance: {fileID: 5007694791047078985}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f6ea793afae29443b6570f4bbdb5b95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6261507646997317213 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1412933906336162324, guid: 1886153a9d4364844b5d2f6c7cd04292, type: 3}

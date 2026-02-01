@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
+using DataCollection;
+using Enums;
 
 public class CardDetailShow : MonoBehaviour
 {
@@ -31,4 +33,30 @@ public class CardDetailShow : MonoBehaviour
     [SerializeField]
     [Tooltip("卡牌反面朝上完全隐藏时显示的遮盖UI根对象")]
     private GameObject cardHideMaskGO;
+
+    public void ShowCardDetail(Sprite portraitSprite, string abilityDes, string affiliation, int cardNum, string victoryCondition, string cardName, bool isVisableHide, bool isHide)
+    {
+        portrait.sprite = portraitSprite;
+        abilityDesText.text = abilityDes;
+        affiliationText.text = affiliation;
+        cardNumText.text = $"数量：{cardNum}";
+        victoryConditionText.text = victoryCondition;
+        cardNameText.text = cardName;
+        //visableHideMask.alpha = isVisableHide ? 1f : 0f;
+        visableHideMask.gameObject.SetActive(isVisableHide);
+        cardHideMaskGO.SetActive(isHide);
+    }
+
+    /// <summary>
+    /// 显示卡牌详情
+    /// </summary>
+    /// <param name="id">卡牌ID</param>
+    /// <param name="isVisableHide">是否可见隐藏</param>
+    /// <param name="isHide">是否隐藏</param>
+    public void ShowCardDetail(CardID id,bool isVisableHide,bool isHide)
+    {
+        var info = GameManager.Instance.GetCardInfo(id);
+        var num = GameManager.Instance.GetCardNum(id);
+        ShowCardDetail(info.portrait, info.abilityDesc, info.AffiliationName, num, info.victoryCondition, info.CardName, isVisableHide, isHide);
+    }
 }

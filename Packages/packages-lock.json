@@ -25,6 +25,15 @@
       },
       "hash": "8546d023cfba7b06ca4373761ce09bfff8d2ac66"
     },
+    "com.dreemurrstudio.network": {
+      "version": "https://github.com/DreemurrDango/unitypackages-network.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.dreemurrstudio.utilities": "3.4.1"
+      },
+      "hash": "53605c131b1594c6d2d439de1efb001904236215"
+    },
     "com.dreemurrstudio.uitransition": {
       "version": "https://github.com/DreemurrDango/unitypackages-uitransition.git",
       "depth": 0,

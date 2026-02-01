@@ -4,12 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
 /// 卡牌在场景中的实例脚本
 /// </summary>
-public class CardUI : MonoBehaviour
+public class CardUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
 {
     [Header("UI组件")]
     [SerializeField]
@@ -78,5 +79,51 @@ public class CardUI : MonoBehaviour
     /// <summary>
     /// 此卡牌的信息
     /// </summary>
-    private CardInfo cardInfo;
+    private CardID cardID;
+
+    /// <summary>
+    /// 获取其中的卡牌信息
+    /// </summary>
+    public CardID ID => cardID;
+
+    public void Init(CardID id,CardState cardState)
+    {
+        // 初始化基本数据
+        cardID = id;
+        visablePlayer = new List<PlayerID>();
+        this.belongerID = PlayerID.COUNT;
+        this.cardState = cardState;
+        var info = GameManager.Instance.GetCardInfo(cardID);
+        var num = GameManager.Instance.GetCardNum(cardID);
+        // UI显示内容
+        cardNameText.text = info.CardName;
+        cardNameText.color = info.nameColor;
+        portrait.sprite = info.portrait;
+        portrait.color = info.portColor;
+        abilityDesText.text = info.abilityDesc;
+        affiliationText.text = info.AffiliationName;
+        affiliationText.color = info.afiliationTextColor;
+        cardNumText.text = num.ToString();
+        victoryConditionText.text = $"<b>胜利条件</b>:{info.victoryCondition}";
+        // 初始隐藏相关UI
+        visableHideMask.alpha = 0f;
+        cardHideMaskGO.SetActive(true);
+        interactTipText.gameObject.SetActive(false);
+        sourceHistoryText.gameObject.SetActive(false);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
 }

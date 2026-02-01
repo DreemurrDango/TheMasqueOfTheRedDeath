@@ -128,12 +128,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1702ca715dae53c45a937653f722e5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 0
   canvasGroup: {fileID: 5783438127744152050}
   cardLayoutGroup: {fileID: 6879858664648527373}
   cardUIPrefab: {fileID: 6091946369221777199, guid: 1886153a9d4364844b5d2f6c7cd04292, type: 3}
   playerNameText: {fileID: 2898828442302289192}
   cardNumText: {fileID: 4155971637975469588}
   gameProcessText: {fileID: 9003097203599274626}
+  processAnimatedText: {fileID: 6190639505315868435}
+  placedCardAnimStartPosRT: {fileID: 7989218886752212762}
+  usedCardShowImage: {fileID: 1578513808057537580}
+  usedCardShow: {fileID: 2191725134427113069}
+  BelongerID: 0
 --- !u!225 &5783438127744152050
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -321,7 +327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1887028820441534777
 RectTransform:
   m_ObjectHideFlags: 0
@@ -375,7 +381,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1233,6 +1239,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d5502716351a9849880c0677a300868, type: 3}
+--- !u!114 &2191725134427113069 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2075835559794380427, guid: 8d5502716351a9849880c0677a300868, type: 3}
+  m_PrefabInstance: {fileID: 190359634659887334}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd981b13d246fad49b73396ac2aa260b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6993510251297189194 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7181477314258462124, guid: 8d5502716351a9849880c0677a300868, type: 3}

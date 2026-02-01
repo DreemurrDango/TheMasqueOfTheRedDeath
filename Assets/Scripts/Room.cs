@@ -20,13 +20,29 @@ public class Room : MonoBehaviour
     private LayoutGroup roomCardGroup;
     [SerializeField]
     [Tooltip("卡牌槽位实例原型")]
-    private GameObject cardSlotPrefabGO;
+    private RoomCardSlot roomCardSlotPrefab;
     [SerializeField]
     [Tooltip("房间内放置卡牌实例的缩放大小")]
     private float cardScale = 0.6f;
+    [SerializeField]
+    [Tooltip("交互提示UI对象")]
+    private GameObject interactbleTipGO;
 
     /// <summary>
     /// 当前所有放置在此房间中的卡牌实例
     /// </summary>
     private List<CardUI> cards;
+
+    /// <summary>
+    /// 初始化清空重置
+    /// </summary>
+    public void InitClear()
+    {
+        // 清空房间内卡牌实例
+        foreach (var rcs in roomCardGroup.GetComponentsInChildren<RoomCardSlot>())
+            Destroy(rcs.gameObject);
+        cards = new List<CardUI>();
+        // 关闭交互提示
+        interactbleTipGO.SetActive(false);
+    }
 }

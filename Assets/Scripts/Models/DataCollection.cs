@@ -63,7 +63,11 @@ namespace DataCollection
         /// <summary>
         /// 阵营显示名称
         /// </summary>
-        public string AffiliationName => affiliation.ToString();
+        public string AffiliationName => affiliation switch
+        { 
+            Affiliation.红死魔 or Affiliation.宾客 => affiliation.ToString(),
+            _ => "特殊",
+        };
     }
 
     /// <summary>

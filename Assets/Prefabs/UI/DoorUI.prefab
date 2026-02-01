@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 847307174536402101}
   - component: {fileID: 874825166647816754}
   m_Layer: 5
-  m_Name: PlaceableTip
+  m_Name: InteractableTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -617,6 +617,7 @@ MonoBehaviour:
   cardSlotGO: {fileID: 823515711587690565}
   placeableTipShowGO: {fileID: 7720752279634961259}
   cardUIPrefab: {fileID: 6091946369221777199, guid: 1886153a9d4364844b5d2f6c7cd04292, type: 3}
+  connetedRooms: []
 --- !u!1001 &63444195792547510
 PrefabInstance:
   m_ObjectHideFlags: 0
