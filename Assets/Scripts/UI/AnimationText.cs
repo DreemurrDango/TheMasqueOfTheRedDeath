@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -44,5 +44,18 @@ public class AnimationText : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
+    }
+
+    /// <summary>
+    /// 设置显示的文本
+    /// </summary>
+    /// <param name="text">文本内容</param>
+    /// <param name="playAnimation">是否播放文本动画</param>
+    public void SetText(string text, bool playAnimation)
+    {
+        tmp_Text ??= GetComponent<TMP_Text>();
+        tmp_Text.text = text;
+        strArgus[0] = text;
+        enabled = playAnimation;
     }
 }

@@ -1998,8 +1998,9 @@ MonoBehaviour:
   - id: 3
     name: "\u5BB4\u4F1A\u5BBE\u5BA24"
     nameColor: {r: 0, g: 0, b: 0, a: 1}
+  gameCardNumConfigList: []
   startHandCardNum: 5
-  startHideCardNum: 4
+  startHideCardNum: 0
   roomUIs:
   - {fileID: 5584100749167239087}
   - {fileID: 1886921561}
@@ -2022,7 +2023,11 @@ MonoBehaviour:
   - {fileID: 1498109600}
   - {fileID: 1538842770}
   - {fileID: 2113445169}
-  localPlayerID: 0
+  gameState: 0
+  gameConfig:
+    ipAddress: 192.168.100.100
+    serverIPAddress: 192.168.100.187
+    isServer: 0
 --- !u!4 &465730975
 Transform:
   m_ObjectHideFlags: 0
@@ -5927,11 +5932,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2966089092000159194, guid: 38a49e4ef8ac3824fb62930adc1df905, type: 3}
       propertyPath: endValueV2.x
-      value: 30
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 2966089092000159194, guid: 38a49e4ef8ac3824fb62930adc1df905, type: 3}
       propertyPath: endValueV2.y
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3543189647851716426, guid: 38a49e4ef8ac3824fb62930adc1df905, type: 3}
       propertyPath: m_AnchorMax.y
