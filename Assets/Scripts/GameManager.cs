@@ -108,12 +108,16 @@ public class GameManager : Singleton<GameManager>
     /// 当前游戏轮数
     /// </summary>
     private int gameTurn;
+    ///// <summary>
+    ///// 当前轮的行动玩家序号
+    ///// </summary>
+    //private int turnPlayerIndex;
     /// <summary>
-    /// 当前轮的行动玩家序号
+    /// 当前正在进行其回合的玩家ID
     /// </summary>
-    private int turnPlayerIndex;
+    private PlayerID currentTurnPlayer = PlayerID.COUNT;
     /// <summary>
-    /// 每一轮的起始玩家ID
+    /// 游戏的起始轮玩家ID
     /// </summary>
     private PlayerID startPlayer;
     
@@ -127,6 +131,10 @@ public class GameManager : Singleton<GameManager>
     /// <param name="id"></param>
     /// <returns></returns>
     public CardInfo GetCardInfo(CardID id) => cardInfoSO.GetInfo(id);
+    /// <summary>
+    /// 获取当前正在进行其回合的玩家ID
+    /// </summary>
+    public PlayerID CurrentTurnPlayer => currentTurnPlayer;
     /// <summary>
     /// 获取卡牌在卡组中的总张数
     /// </summary>
@@ -200,6 +208,7 @@ public class GameManager : Singleton<GameManager>
         var baseMsg = JsonConvert.DeserializeObject<MessageDataBase>(message);
         switch (baseMsg.messageType)
         {
+            // 房间玩家信息更新事件
             case MessageType.S2C_RoomPlayerUpdated:
                 if (gameState != GameState.RoomWaitting) return;
                 var rpu = JsonUtility.FromJson<S2C_RoomPlayerUpdated>(message);
@@ -210,27 +219,31 @@ public class GameManager : Singleton<GameManager>
                     playerCardPanels[((int)aimID)].InitBelonger(GetPlayerInfo(aimID));
                 }
                 break;
+            // 游戏正式开始事件
             case MessageType.S2C_GameplayStarted:
                 if(gameState != GameState.RoomWaitting) return;
                 var gs = JsonUtility.FromJson<S2C_GameplayStarted>(message);
                 var dict = gs.playerStartHandCardsDict;
                 gameState = GameState.Gameplay;
+                startPlayer = gs.startPlayer;
                 // 更新UI，监听动画流程结束回调
-                for(int i = 0; i < PlayerNum; i++)
+                for (int i = 0; i < PlayerNum; i++)
                 {
                     var aimID = (PlayerID)((((int)LocalPlayerID) + i) % PlayerNum);
-                    playerCardPanels[((int)aimID)].InitGameplayStart(GetPlayerInfo(aimID),dict[aimID],0.5f,1f,(id) =>
+                    playerCardPanels[i].InitGameplayStart(GetPlayerInfo(aimID),dict[aimID],0.5f,1f,(id) =>
                     {
                         if (!IsServer || id != LocalPlayerID) return;
                         SendS2CMessage_PlayerTurnStarted(1, 0);
                     });
                 }
                 break;
+            // 玩家回合开始事件
             case MessageType.S2C_PlayerTurnStarted:
                 if (gameState != GameState.Gameplay) return;
                 var pts = JsonUtility.FromJson<S2C_PlayerTurnStarted>(message);
                 gameTurn = pts.turn;
-                turnPlayerIndex = pts.turnPlayerIndex;
+                currentTurnPlayer = pts.turnPlayerID;
+                //turnPlayerIndex = pts.turnPlayerIndex;
                 foreach (var p in playerCardPanels) 
                     p.ShowTurnStartInfo(pts.turnPlayerID, gameTurn);
                 break;
@@ -241,21 +254,27 @@ public class GameManager : Singleton<GameManager>
     {
     }
 
+
+    #region 服务器端方法
+    /// <summary>
+    /// 客户端从服务器断开连接时的处理动作
+    /// </summary>
+    /// <param name="ipep">断开连接的客户端IP端点</param>
     private void OnClientDisconnected(IPEndPoint ipep)
     {
         playerIPIDdict.Remove(ipep);
         SendS2CMessage_RoomPlayerUpdated(playerIPIDdict);
+        //TODO: 断线重连处理
     }
-
 
     /// <summary>
     /// 服务器处理客户端连接时动作
     /// 发送房间玩家信息更新事件，人数凑齐时正式开始游戏流程
     /// </summary>
-    /// <param name="ipep"></param>
+    /// <param name="ipep">新连接的客户端IP端点</param>
     private void OnClientConnected(IPEndPoint ipep)
     {
-        if(gameState != GameState.RoomWaitting) return;
+        if (gameState != GameState.RoomWaitting) return;
         var keyList = playerIPIDdict.Keys.ToList();
         for (int i = 0; i < playerIPIDdict.Count; i++)
             playerIPIDdict[keyList[i]] = (PlayerID)i;
@@ -266,7 +285,7 @@ public class GameManager : Singleton<GameManager>
         {
             // -- 开始新游戏轮的初始化
             gameTurn = 0;
-            turnPlayerIndex = 0;
+            currentTurnPlayer = PlayerID.COUNT;
             startPlayer = PlayerID.COUNT;
             gameState = GameState.Gameplay;
             // -- 生成乱序总牌堆
@@ -278,7 +297,8 @@ public class GameManager : Singleton<GameManager>
             }
             cardList.Shuffle();
             // -- 分发起始手牌
-            Dictionary<PlayerID,List<CardID>> playerStartHandCards = new();
+            Dictionary<PlayerID, List<CardID>> playerStartHandCards = new();
+            startPlayer = PlayerID.COUNT;
             for (int i = 0; i < playerIPIDdict.Count; i++)
             {
                 var aimID = (PlayerID)i;
@@ -289,11 +309,10 @@ public class GameManager : Singleton<GameManager>
                     startPlayer = aimID;
             }
             // --发送游戏开始消息
-            SendS2CMessage_GameplayStart(playerStartHandCards);
+            SendS2CMessage_GameplayStart(playerStartHandCards, startPlayer);
         }
     }
 
-    #region 服务器端方法
     /// <summary>
     /// 获取基于当前玩家ID的前一个玩家ID
     /// </summary>
@@ -357,12 +376,14 @@ public class GameManager : Singleton<GameManager>
     /// 向所有客户端发送游戏开始消息
     /// </summary>
     /// <param name="startHandCards">开始时的手牌信息字典</param>
-    private void SendS2CMessage_GameplayStart(Dictionary<PlayerID,List<CardID>> startHandCards)
+    /// <param name="startPlayer">游戏的起始轮玩家ID</param>
+    private void SendS2CMessage_GameplayStart(Dictionary<PlayerID,List<CardID>> startHandCards, PlayerID startPlayer)
     {
         var msg = new S2C_GameplayStarted
         {
             messageType = MessageType.S2C_GameplayStarted,
-            playerStartHandCardsDict = startHandCards
+            playerStartHandCardsDict = startHandCards,
+            startPlayer = startPlayer            
         };
         var json = msg.ToJson();
         tcpServer.SendToAllClients(json);
@@ -373,13 +394,13 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     /// <param name="turn">回合数</param>
     /// <param name="turnPlayerIndex">要开始回合的玩家在回合中的运行序号</param>
-    private void SendS2CMessage_PlayerTurnStarted(int turn,int turnPlayerIndex)
+    private void SendS2CMessage_PlayerTurnStarted(int turn,PlayerID turnPLayer)
     {
         var msg = new S2C_PlayerTurnStarted
         {
             messageType = MessageType.S2C_PlayerTurnStarted,
-            turnPlayerID = (PlayerID)((((int)startPlayer) + turnPlayerIndex)%PlayerNum),
-            turnPlayerIndex = turnPlayerIndex
+            turnPlayerID = turnPLayer,
+            //turnPlayerIndex = turnPlayerIndex
         };
         var json = msg.ToJson();
         tcpServer.SendToAllClients(json);

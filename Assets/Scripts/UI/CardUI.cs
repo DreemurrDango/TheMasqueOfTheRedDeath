@@ -1,4 +1,5 @@
 using DataCollection;
+using DG.Tweening;
 using Enums;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
+using DreemurrStudio.AudioSystem;
 
 /// <summary>
 /// 卡牌在场景中的实例脚本
@@ -47,6 +48,15 @@ public class CardUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
     [SerializeField]
     [Tooltip("显示卡牌最后来源的文本")]
     private TMP_Text sourceHistoryText;
+    [SerializeField]
+    [Tooltip("卡牌效果按钮：发动效果")]
+    private Button useEffectButton;
+    [SerializeField]
+    [Tooltip("卡牌效果按钮：封锁走廊")]
+    private Button lockDoorButton;
+    [SerializeField]
+    [Tooltip("卡牌效果按钮：盖卡放置")]
+    private Button coverToRoomButton;
 
     [Header("显示设置")]
     [SerializeField]
@@ -63,7 +73,16 @@ public class CardUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
     private float hoverScale = 1.4f;
     [SerializeField]
     [Tooltip("卡牌缩放切换动画时间")]
-    private float scaleTransitionTime = 0.3f;
+    private float scaleTransitionTime = 0f;
+    [SerializeField]
+    [Tooltip("卡牌被选中时播放的音效名称-可交互")]
+    private string selectInteractableSFX = "Card_Select_Interactable";
+    [SerializeField]
+    [Tooltip("卡牌被选中时播放的音效名称-不可交互")]
+    private string selectNotInteractableSFX = "Card_Select_NotInteractable";
+    [SerializeField]
+    [Tooltip("在结算流程中，卡牌被感染时显示的动画组件")]
+    private DOTweenAnimation onInfectedShowAnimation;
 
     /// <summary>
     /// 已查看此卡牌后，拥有查看权力的玩家ID列表
@@ -82,9 +101,21 @@ public class CardUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
     /// </summary>
     private CardID cardID;
     /// <summary>
+    /// 卡牌数据
+    /// </summary>
+    private CardInfo _cardInfo;
+    /// <summary>
     /// 是否处于隐藏，非公开状态
     /// </summary>
     private bool _isHidden = false;
+    /// <summary>
+    /// 当前所处卡槽的父级对象
+    /// </summary>
+    private object parent;
+    /// <summary>
+    /// 当前是否正在使用中
+    /// </summary>
+    private bool _inUsing = false;
 
     /// <summary>
     /// 获取其中的卡牌信息
@@ -102,6 +133,10 @@ public class CardUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
             UpdateShow();
         }
     }
+    /// <summary>
+    /// 获取卡牌数据信息
+    /// </summary>
+    public CardInfo Info => _cardInfo;
 
     /// <summary>
     /// 初始化卡牌显示
@@ -117,18 +152,22 @@ public class CardUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
         _isHidden = isHidden;
         this.belongerID = belonger;
         this.cardState = cardState;
-        var info = GameManager.Instance.GetCardInfo(cardID);
+        _cardInfo = GameManager.Instance.GetCardInfo(cardID);
         var num = GameManager.Instance.GetCardNum(cardID);
         // UI显示内容
-        cardNameText.text = info.CardName;
-        cardNameText.color = info.nameColor;
-        portrait.sprite = info.portrait;
-        portrait.color = info.portColor;
-        abilityDesText.text = info.abilityDesc;
-        affiliationText.text = info.AffiliationName;
-        affiliationText.color = info.afiliationTextColor;
+        cardNameText.text = _cardInfo.CardName;
+        cardNameText.color = _cardInfo.nameColor;
+        portrait.sprite = _cardInfo.portrait;
+        portrait.color = _cardInfo.portColor;
+        abilityDesText.text = _cardInfo.abilityDesc;
+        affiliationText.text = _cardInfo.AffiliationName;
+        affiliationText.color = _cardInfo.afiliationTextColor;
+        useEffectButton.gameObject.SetActive(false);
+        lockDoorButton.gameObject.SetActive(false);
+        coverToRoomButton.gameObject.SetActive(false);
+        onInfectedShowAnimation.gameObject.SetActive(false);
         cardNumText.text = num.ToString();
-        victoryConditionText.text = $"<b>胜利条件</b>:{info.victoryCondition}";
+        victoryConditionText.text = $"<b>胜利条件</b>:{_cardInfo.victoryCondition}";
         // 初始隐藏相关UI
         UpdateShow();
         interactTipText.gameObject.SetActive(false);
@@ -166,7 +205,7 @@ public class CardUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
     }
 
     /// <summary>
-    /// 更新显示状态
+    /// 根据是否隐藏与知晓权限更新显示状态
     /// </summary>
     private void UpdateShow()
     {
@@ -188,16 +227,46 @@ public class CardUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        switch (eventData.button)
+        {
+            // 左键单击时，若处于玩家手牌或可交互状态则选中此卡牌
+            case PointerEventData.InputButton.Left:
+                // 处于本地玩家手牌且正在进行回合时显示互动按钮节目
+                if (cardState == CardState.InHand && GameManager.Instance.LocalPlayerID == belongerID && GameManager.Instance.CurrentTurnPlayer == belongerID)
+                {
+                    SFXManager.Instance.PlayOverlaySFX(selectInteractableSFX);
+                    // 根据卡牌数据，显示互动按钮
+                    useEffectButton.gameObject.SetActive((Info.usageType & CardUsageType.发动效果) != 0);
+                    lockDoorButton.gameObject.SetActive((Info.usageType & CardUsageType.封锁走廊) != 0);
+                    coverToRoomButton.gameObject.SetActive((Info.usageType & CardUsageType.盖卡放置) != 0);
+                }
+                EventHandler.CallOnCardBeClicked(this, cardID);
+                break;
+            case PointerEventData.InputButton.Right:
+                break;
+            default:
+                break;
+        }
+        //// 播放选中音效
+        //if (IsInteractable)
+        //{
+        //    SFXManager.Instance.PlayOverlaySFX(selectInteractableSFX);
+        //}
+        //else
+        //{
+        //    SFXManager.Instance.PlayOverlaySFX(selectNotInteractableSFX);
+        //}
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        outlineImage.color = hoverOutlineColor;
+        transform.DOScale(hoverScale, scaleTransitionTime);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        outlineImage.color = normalOutlineColor;
+        transform.DOScale(normalScale, scaleTransitionTime);
     }
 }

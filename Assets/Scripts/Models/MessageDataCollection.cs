@@ -90,6 +90,7 @@ namespace DreemurrStudio.Network
     public class S2C_GameplayStarted : MessageDataBase
     {
         public Dictionary<PlayerID, List<CardID>> playerStartHandCardsDict;
+        public PlayerID startPlayer;
     }
 
     /// <summary>
@@ -102,10 +103,10 @@ namespace DreemurrStudio.Network
         /// 要开始回合的玩家ID
         /// </summary>
         public PlayerID turnPlayerID;
-        /// <summary>
-        /// 要开始回合的玩家在回合在的运行序号
-        /// </summary>
-        public int turnPlayerIndex;
+        ///// <summary>
+        ///// 要开始回合的玩家在回合在的运行序号
+        ///// </summary>
+        //public int turnPlayerIndex;
         /// <summary>
         /// 回合数
         /// </summary>

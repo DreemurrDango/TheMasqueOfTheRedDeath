@@ -52,7 +52,7 @@ namespace DataCollection
         /// </summary>
         public Color afiliationTextColor;
         /// <summary>
-        /// 卡牌的使用方式
+        /// 卡牌的使用方式（位枚举）
         /// </summary>
         public CardUsageType usageType;
 

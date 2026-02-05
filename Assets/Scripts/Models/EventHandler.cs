@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using DataCollection;
+using Enums;
 
 /// <summary>
 /// 事件转发中心
@@ -33,5 +34,17 @@ public static class EventHandler
     /// </summary>
     public static void CallOnAction(int argu1, bool argu2, string argu3)
         => OnAction?.Invoke(argu1, argu2, argu3);
+
+    /// <summary>
+    /// 当卡牌被左键单击选中时触发
+    /// </summary>
+    public static event Action<CardUI, CardID> OnCardBeClicked;
+    /// <summary>
+    /// 出发卡牌被左键单击选中事件
+    /// </summary>
+    /// <param name="cardUI">被选中的卡牌实例</param>
+    /// <param name="cardID">被选中的卡牌ID</param>
+    public static void CallOnCardBeClicked(CardUI cardUI, CardID cardID)
+        => OnCardBeClicked?.Invoke(cardUI, cardID);
     #endregion
 }

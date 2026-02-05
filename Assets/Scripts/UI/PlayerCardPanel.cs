@@ -9,6 +9,9 @@ using DG.Tweening;
 using System;
 using DataCollection;
 
+/// <summary>
+/// 玩家卡牌面板，控制各个玩家手牌的显示与交互，同时存储玩家手牌数据
+/// </summary>
 public class PlayerCardPanel : MonoBehaviour
 {
     [SerializeField]
@@ -95,34 +98,40 @@ public class PlayerCardPanel : MonoBehaviour
     /// <param name="onCompletedAction">结束后的动作</param>
     public void InitGameplayStart(PlayerInfo info,List<CardID> startHandCards,float animInterval,float completedWaitTime,Action<PlayerID> onCompletedAction)
     {
+        // 设置玩家信息
         this.playerID = info.id;
         playerNameText.text = info.name;
         playerNameText.color = info.nameColor;
-        var belongToLocal = playerID == GameManager.Instance.LocalPlayerID;
+        var localPlayer = GameManager.Instance.LocalPlayerID;
+        var belongToLocal = playerID == localPlayer;
         processAnimatedText.SetText("分发手牌中", true);
         if (startHandCards == null) startHandCards = new List<CardID>();
         // 播放卡牌入库动画
         var sequence = DOTween.Sequence();
         for (int i = 0; i < startHandCards.Count; i++)
         {
-            sequence.AppendCallback(() => AddCard(startHandCards[i]));
+            CardUI card;
+            sequence.AppendCallback(() => 
+            {
+                card = AddCard();
+                card.Init(startHandCards[i], CardState.InHand, !belongToLocal, playerID);
+            });
             sequence.AppendInterval(animInterval);
         }
         sequence.onComplete += () => onCompletedAction(playerID);
     }
 
     /// <summary>
-    /// 添加卡牌到手牌区域中
+    /// 生成卡牌UI实例，并将其添加到手牌区域中
     /// </summary>
-    /// <param name="cardID"></param>
-    private void AddCard(CardID cardID)
+    private CardUI AddCard()
     {
         var cardGO = Instantiate(cardUIPrefab.gameObject, cardLayoutGroup.transform);
         var card = cardGO.GetComponent<CardUI>();
         (cardGO.transform as RectTransform).pivot = new Vector2(0.5f, 0f);
-        card.Init(cardID, CardState.InHand, false, playerID);
         inHandCardsList.Add(card);
         LayoutRebuilder.MarkLayoutForRebuild(cardLayoutGroup.transform as RectTransform);
+        return card;
     }
 
     /// <summary>

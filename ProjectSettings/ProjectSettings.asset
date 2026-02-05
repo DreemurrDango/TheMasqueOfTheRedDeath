@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: DreemurrDango
   productName: "2026\u7EA2\u6B7B\u9B54\u7684\u5047\u9762\u821E\u4F1A"
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
